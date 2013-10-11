@@ -1,0 +1,17 @@
+<h1><%= @movie.title %></h1>
+<%= image_tag @movie.picture %>
+
+<p><%= @movie.description %></p>
+
+<ul>
+  <% @movie.genres.each do |genre| %>
+  <li><%= genre.name %></li>
+  <% end %>
+</ul>
+
+<% @movie.actors.each do |actor| %>
+<div>
+  <div><%= actor.name %></div>
+  <%= image_tag actor.picture %>
+</div>
+<% end %>

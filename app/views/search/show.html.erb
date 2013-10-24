@@ -1,0 +1,37 @@
+<% if @genres.length %>
+  <h2>Genres</h2>
+  <ul class='inline'>
+    <% if params[:genre] %>
+      <%= @genre.name %> <%= link_to "remove", params.merge(genre: nil) %>
+    <% else %>
+      <% @genres.each do |genre| %>
+        <li>
+        <%= link_to "#{genre[:model].name} (#{genre[:count]})",
+          params.merge(genre: genre[:model].id) %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @years.length %>
+  <h2>Release Years</h2>
+  <ul class='inline'>
+    <% if params[:year] %>
+      <%= @year %> <%= link_to "remove", params.merge(year: nil) %>
+    <% else %>
+      <% @years.each do |year| %>
+        <li>
+        <%= link_to "#{year[:model]} (#{year[:count]})",
+          params.merge(year: year[:model]) %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<hr>
+
+<%= render @movies %>
+
+<%= will_paginate @movies %>

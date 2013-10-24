@@ -3,6 +3,8 @@
 
 <p><%= @movie.description %></p>
 
+<p><%= @movie.release_date %></p>
+
 <ul>
   <% @movie.genres.each do |genre| %>
   <li><%= genre.name %></li>

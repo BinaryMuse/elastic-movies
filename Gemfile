@@ -34,6 +34,7 @@ end
 
 gem 'httparty'
 gem 'will_paginate'
+gem 'elasticsearch'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,12 +1,5 @@
 <h1>Movies</h1>
 
-<% @movies.each do |movie| %>
-<div>
-  <h2><%= movie.title %> <small><%= link_to 'details', movie %></small></h2>
-  <p>
-    <%= movie.description %>
-  </p>
-</div>
-<% end %>
+<%= render @movies %>
 
 <%= will_paginate @movies %>

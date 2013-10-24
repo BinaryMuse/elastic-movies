@@ -8,6 +8,16 @@
 </head>
 <body>
 
+<form action='/search' method='get'>
+  <input type='text' name='term' placeholder='search'
+    value="<%= @preload_search_term %>">
+  <input type='submit' value='Search'>
+</form>
+
+<% if flash[:alert].present? %>
+  <%= content_tag :div, flash[:alert], class: 'alert' %>
+<% end %>
+
 <%= yield %>
 
 </body>

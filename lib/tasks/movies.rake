@@ -6,6 +6,11 @@ namespace :movies do
     movie_ids = []
 
     api = ApiQuery.new
+
+    # Instead of querying for the top movies, we use a hardcoded list of IDs.
+    # If you want to query The Movie DB's API, comment out the next line, and
+    # uncomment the commented out lines.
+    movie_ids = TOP_MOVIE_IDS
     # (1..100).each do |page|
     #   puts "Fetching page #{page} of 100..."
     #   data = api.top_rated(page)
@@ -13,7 +18,6 @@ namespace :movies do
     #   sleep 0.25
     # end
 
-    movie_ids = TOP_MOVIE_IDS
     puts "Top movie IDs: #{movie_ids.inspect}"
 
     movie_ids.each_with_index do |id, idx|

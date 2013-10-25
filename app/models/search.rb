@@ -44,7 +44,7 @@ class Search
     @data[:query][:bool][occur] ||= []
     @data[:query][:bool][occur] << data
   end
-  
+
   def add_term(occur, field, value, boost = nil)
     data = { term: {} }
     data[:term][field] = { value: value }

@@ -22,3 +22,14 @@ MOVIEDB_API_KEY="my_api_key" rake movies:populate
 To save some time, the IDs for the top 2000 movies are hardcoded; see `lib/tasks/movies.rake` for more information.
 
 If you do *not* have an API key, you can [download an SQLite database preloaded with the data](https://github.com/BinaryMuse/elastic-movies/releases/download/demo/development.sqlite3). Simply drop it into your `db/` folder with the name `development.sqlite3`.
+
+Creating the Elasticsearch Index
+--------------------------------
+
+You can run
+
+```bash
+rake search:index
+```
+
+to create the index. **This will erase any existing index named `movies` and create a new index of that name.**

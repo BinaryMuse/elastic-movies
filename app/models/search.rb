@@ -1,3 +1,4 @@
+# NOTICE: Deprecated in favor of MovieSearch; see SearchController
 class Search
   attr_reader :term, :results
 

@@ -35,6 +35,7 @@ end
 gem 'httparty'
 gem 'will_paginate'
 gem 'elasticsearch'
+gem 'tire'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

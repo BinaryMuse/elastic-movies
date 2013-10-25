@@ -1,7 +1,7 @@
 Elasticsearch Movies
 ====================
 
-This project was built to test Elasticsearch. It performs searches against a database of 2000 of the top movies according to [The Movie DB](themoviedb.org).
+This project was built to test Elasticsearch. It performs searches against a database of 2000 of the top movies according to [The Movie DB](http://themoviedb.org).
 
 Installation
 ------------

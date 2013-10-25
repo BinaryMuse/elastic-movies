@@ -21,4 +21,4 @@ MOVIEDB_API_KEY="my_api_key" rake movies:populate
 
 To save some time, the IDs for the top 2000 movies are hardcoded; see `lib/tasks/movies.rake` for more information.
 
-If you do *not* have an API key, you can download an SQLite database preloaded with the data from [the repo's releases page](https://github.com/BinaryMuse/elastic-movies/releases). Simply drop it into `db/` with the name `development.sqlite3`.
+If you do *not* have an API key, you can [download an SQLite database preloaded with the data](https://github.com/BinaryMuse/elastic-movies/releases/download/demo/development.sqlite3). Simply drop it into your `db/` folder with the name `development.sqlite3`.

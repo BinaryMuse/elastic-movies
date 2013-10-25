@@ -7,11 +7,26 @@ class SearchController < ApplicationController
     @preload_search_term = params[:term]
 
     search = Search.new
-    search.add_match(:title, params[:term])
+    search.add_multi_match(:must, [:title, :actors, :characters], params[:term], use_dis_max: false)
 
     if params[:genre]
       @genre = Genre.find(params[:genre])
-      search.add_term('genre_id_and_name.id', params[:genre])
+      search.add_term(:must, 'genre_id_and_name.id', params[:genre])
+    end
+
+    if params[:year]
+      @year = params[:year]
+      search.add_range(:must, 'release_date', gte: "#{params[:year]}-01-01", lte: "#{params[:year]}-12-31")
+    end
+
+    if params[:budget_low]
+      @budget_low = params[:budget_low].to_i
+      if params[:budget_high]
+        @budget_high = params[:budget_high].to_i
+        search.add_range(:must, 'budget', gte: @budget_low, lte: @budget_high)
+      else
+        search.add_range(:must, 'budget', gte: @budget_low)
+      end
     end
 
     search.perform!
@@ -19,18 +34,6 @@ class SearchController < ApplicationController
     # return render json: search.results
 
     @movies = Movie.where(id: ids).order('release_date ASC')
-
-    # if params[:genre]
-    #   @genre = Genre.find(params[:genre])
-    #   @movies = @movies.includes(:genres).where(:genres => { id: params[:genre] })
-    # end
-
-    if params[:year]
-      @year = params[:year]
-      start = "#{@year}-01-01"
-      finish = "#{@year}-12-31" 
-      @movies = @movies.where('release_date >= ? AND release_date <= ?', start, finish)
-    end
     
     # return render text: @movies.to_sql
 
@@ -42,6 +45,10 @@ class SearchController < ApplicationController
 
     @years = search.results['facets']['dates']['entries'].map do |date|
       { model: Time.at(date['time'] / 1000).utc.strftime("%Y"), count: date['count'] }
+    end
+
+    @budgets = search.results['facets']['budgets']['ranges'].reject { |r| r['count'] == 0 }.map do |range|
+      { from: range['from'].try(:to_i) || 0, to: range['to'].try(:to_i) || nil, count: range['count'] }
     end
     
     # pp search.results

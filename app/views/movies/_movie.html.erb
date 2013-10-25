@@ -1,5 +1,5 @@
 <div>
-  <h2><%= movie.title %> <small><%= movie.release_date %> <%= link_to 'details', movie %></small></h2>
+  <h2><%= movie.title %> <small>(<%= movie.release_date.try(:strftime, "%b, %Y") %>) <%= link_to 'details', movie %></small></h2>
   <p>
     <%= movie.description %>
   </p>

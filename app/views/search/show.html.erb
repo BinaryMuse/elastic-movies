@@ -6,8 +6,7 @@
     <% else %>
       <% @genres.each do |genre| %>
         <li>
-        <%= link_to "#{genre[:model].name} (#{genre[:count]})",
-          params.merge(genre: genre[:model].id) %>
+        <%= link_to "#{genre[:model].name} (#{genre[:count]})", params.merge(genre: genre[:model].id) %>
         </li>
       <% end %>
     <% end %>
@@ -22,8 +21,33 @@
     <% else %>
       <% @years.each do |year| %>
         <li>
-        <%= link_to "#{year[:model]} (#{year[:count]})",
-          params.merge(year: year[:model]) %>
+        <%= link_to "#{year[:model]} (#{year[:count]})", params.merge(year: year[:model]) %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @budgets %>
+  <h2>Budgets</h2>
+  <ul class='inline'>
+    <% if params[:budget_low] %>
+      <% if @budget_high %>
+        <%= number_to_currency @budget_low %> - <%= number_to_currency @budget_high %>
+          <%= link_to "remove", params.merge(budget_low: nil, budget_high: nil) %>
+      <% else %>
+        <%= number_to_currency @budget_low %>+ <%= link_to "remove", params.merge(budget_low: nil, budget_high: nil) %>
+      <% end %>
+    <% else %>
+      <% @budgets.each do |budget| %>
+        <li>
+        <% if budget[:to] %>
+          <%= link_to "#{number_to_currency budget[:from]} - #{number_to_currency budget[:to]} (#{budget[:count]})",
+            params.merge(budget_low: budget[:from], budget_high: budget[:to]) %>
+        <% else %>
+          <%= link_to "#{number_to_currency budget[:from]}+ (#{budget[:count]})",
+            params.merge(budget_low: budget[:from]) %>
+        <% end %>
         </li>
       <% end %>
     <% end %>

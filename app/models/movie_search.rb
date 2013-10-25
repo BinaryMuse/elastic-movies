@@ -16,7 +16,7 @@ class MovieSearch
           end
           b.must { |m| m.term 'genre_id_and_name.id', params[:genre] } if params[:genre]
           b.must { |m| m.range 'release_date', gte: "#{params[:year]}-01-01", lte: "#{params[:year]}-12-31" } if params[:year]
-          if params[:budet_low] && parmas[:budget_high]
+          if params[:budet_low] && params[:budget_high]
             b.must { |m| m.range 'budget', gte: params[:budget_low], lte: params[:budget_high] }
           elsif params[:budget_low]
             b.must { |m| m.range 'budget', gte: params[:budget_low] }

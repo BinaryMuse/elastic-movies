@@ -50,8 +50,7 @@ class MovieSearch
   def perform
     @results ||= begin
       client = Elasticsearch::Client.new
-      results = client.search index: 'movies', body: @search.to_hash
-      Hashie::Mash.new results
+      client.search index: 'movies', body: @search.to_hash
     end
   end
 end

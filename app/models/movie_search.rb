@@ -7,7 +7,13 @@ class MovieSearch
 
       s.query do |q|
         q.boolean do |b|
-          b.must { |m| m.match 'title', params[:term], operator: 'and' }
+          b.must do |m|
+            m.boolean do |sub|
+              sub.should { |m| m.match 'title', params[:term], operator: 'and' }
+              sub.should { |m| m.match 'actors', params[:term], type: 'phrase' }
+              sub.should { |m| m.match 'characters', params[:term], type: 'phrase' }
+            end
+          end
           b.must { |m| m.term 'genre_id_and_name.id', params[:genre] } if params[:genre]
           b.must { |m| m.range 'release_date', gte: "#{params[:year]}-01-01", lte: "#{params[:year]}-12-31" } if params[:year]
           if params[:budet_low] && parmas[:budget_high]

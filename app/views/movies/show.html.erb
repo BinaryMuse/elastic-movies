@@ -13,7 +13,7 @@
 
 <% @movie.actors.each do |actor| %>
 <div>
-  <div><%= actor.name %></div>
+  <div><%= actor.name %> (<%= actor.parts.where(movie_id: @movie.id).all.map(&:character).join(', ') %>)</div>
   <%= image_tag actor.picture %>
 </div>
 <% end %>
